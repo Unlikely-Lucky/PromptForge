@@ -2,6 +2,7 @@ import argparse
 
 from . import __version__
 from .generators.skill import create_skill
+from .validators.skill import validate_all
 
 
 def main():
@@ -18,6 +19,9 @@ def main():
 
     subparsers = parser.add_subparsers(dest="command")
 
+    # -------------------------
+    # new command
+    # -------------------------
     new_parser = subparsers.add_parser(
         "new",
         help="Create resources",
@@ -34,12 +38,24 @@ def main():
         help="Name of the resource",
     )
 
+    # -------------------------
+    # validate command
+    # -------------------------
+    subparsers.add_parser(
+        "validate",
+        help="Validate all skills",
+    )
+
     args = parser.parse_args()
 
     try:
         if args.command == "new":
             if args.resource == "skill":
                 create_skill(args.name)
+
+        elif args.command == "validate":
+            validate_all()
+
         else:
             parser.print_help()
 
