@@ -1,5 +1,5 @@
-name: {name}
+name: translator
 version: 0.1.0
-author:
-description:
+author: Siddhant Kumar
+description: AI-powered translation skill
 license: MIT

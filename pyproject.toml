@@ -8,6 +8,11 @@ version = "0.1.0"
 description = "Framework for building reusable AI skills."
 readme = "README.md"
 requires-python = ">=3.10"
+
+dependencies = [
+    "PyYAML>=6.0",
+]
+
 authors = [
     { name = "PromptForge Contributors" }
 ]

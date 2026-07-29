@@ -1,4 +1,5 @@
 from pathlib import Path
+import yaml
 
 REQUIRED_FILES = {
     "README.md",
@@ -10,13 +11,41 @@ REQUIRED_FILES = {
     "CHANGELOG.md",
 }
 
+REQUIRED_METADATA = {
+    "name",
+    "version",
+    "author",
+    "description",
+    "license",
+}
+
 
 def validate_skill(path: Path) -> list[str]:
     errors = []
 
+    # Check required files
     for filename in REQUIRED_FILES:
         if not (path / filename).exists():
-            errors.append(f"Missing: {filename}")
+            errors.append(f"Missing file: {filename}")
+
+    metadata_file = path / "metadata.yaml"
+
+    if metadata_file.exists():
+        try:
+            metadata = yaml.safe_load(
+                metadata_file.read_text(encoding="utf-8")
+            ) or {}
+
+            for field in REQUIRED_METADATA:
+                value = metadata.get(field)
+
+                if value is None:
+                    errors.append(f"Missing field: {field}")
+                elif isinstance(value, str) and value.strip() == "":
+                    errors.append(f"Empty field: {field}")
+
+        except Exception as e:
+            errors.append(f"Invalid metadata.yaml ({e})")
 
     return errors
 

@@ -1,8 +1,11 @@
 import argparse
 
 from . import __version__
-from .generators.skill import create_skill
-from .validators.skill import validate_all
+
+from .commands.new import run as new_command
+from .commands.validate import run as validate_command
+from .commands.list import run as list_command
+from .commands.info import run as info_command
 
 
 def main():
@@ -17,14 +20,17 @@ def main():
         version=f"PromptForge {__version__}",
     )
 
-    subparsers = parser.add_subparsers(dest="command")
+    subparsers = parser.add_subparsers(
+        dest="command",
+        metavar="{new,validate,list,info}",
+    )
 
-    # -------------------------
-    # new command
-    # -------------------------
+    # ======================================================
+    # NEW
+    # ======================================================
     new_parser = subparsers.add_parser(
         "new",
-        help="Create resources",
+        help="Create new PromptForge resources",
     )
 
     new_parser.add_argument(
@@ -35,32 +41,56 @@ def main():
 
     new_parser.add_argument(
         "name",
-        help="Name of the resource",
+        nargs="?",
+        help="Name of the skill",
     )
 
-    # -------------------------
-    # validate command
-    # -------------------------
-    subparsers.add_parser(
+    new_parser.set_defaults(func=new_command)
+
+    # ======================================================
+    # VALIDATE
+    # ======================================================
+    validate_parser = subparsers.add_parser(
         "validate",
         help="Validate all skills",
     )
 
+    validate_parser.set_defaults(func=validate_command)
+
+    # ======================================================
+    # LIST
+    # ======================================================
+    list_parser = subparsers.add_parser(
+        "list",
+        help="List all available skills",
+    )
+
+    list_parser.set_defaults(func=list_command)
+
+    # ======================================================
+    # INFO
+    # ======================================================
+    info_parser = subparsers.add_parser(
+        "info",
+        help="Show information about a skill",
+    )
+
+    info_parser.add_argument(
+        "name",
+        help="Skill name",
+    )
+
+    info_parser.set_defaults(func=info_command)
+
+    # ======================================================
+    # RUN
+    # ======================================================
     args = parser.parse_args()
 
-    try:
-        if args.command == "new":
-            if args.resource == "skill":
-                create_skill(args.name)
-
-        elif args.command == "validate":
-            validate_all()
-
-        else:
-            parser.print_help()
-
-    except FileExistsError as e:
-        print(f"Error: {e}")
+    if hasattr(args, "func"):
+        args.func(args)
+    else:
+        parser.print_help()
 
 
 if __name__ == "__main__":
