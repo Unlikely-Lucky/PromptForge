@@ -7,6 +7,7 @@ src/promptforge/builder.py
 src/promptforge/cli.py
 src/promptforge/generators.py
 src/promptforge/info.py
+src/promptforge/installer.py
 src/promptforge/listing.py
 src/promptforge/templates.py
 src/promptforge/utils.py
@@ -19,6 +20,7 @@ src/promptforge.egg-info/top_level.txt
 src/promptforge/commands/__init__.py
 src/promptforge/commands/build.py
 src/promptforge/commands/info.py
+src/promptforge/commands/install.py
 src/promptforge/commands/list.py
 src/promptforge/commands/new.py
 src/promptforge/commands/validate.py

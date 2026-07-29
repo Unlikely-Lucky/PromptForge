@@ -7,6 +7,7 @@ from .commands.validate import run as validate_command
 from .commands.list import run as list_command
 from .commands.info import run as info_command
 from .commands.build import run as build_command
+from .commands.install import run as install_command
 
 
 def main():
@@ -23,84 +24,86 @@ def main():
 
     subparsers = parser.add_subparsers(
         dest="command",
-        metavar="{new,validate,list,info,build}",
+        metavar="{new,validate,list,info,build,install}",
     )
 
-    # ==================================================
-    # NEW
-    # ==================================================
+    # ---------------- NEW ----------------
+
     new_parser = subparsers.add_parser(
         "new",
-        help="Create new PromptForge resources",
+        help="Create a new resource",
     )
 
     new_parser.add_argument(
         "resource",
         choices=["skill"],
-        help="Resource type",
     )
 
     new_parser.add_argument(
         "name",
         nargs="?",
-        help="Name of the skill",
     )
 
     new_parser.set_defaults(func=new_command)
 
-    # ==================================================
-    # VALIDATE
-    # ==================================================
+    # ---------------- VALIDATE ----------------
+
     validate_parser = subparsers.add_parser(
         "validate",
-        help="Validate all skills",
+        help="Validate skills",
     )
 
     validate_parser.set_defaults(func=validate_command)
 
-    # ==================================================
-    # LIST
-    # ==================================================
+    # ---------------- LIST ----------------
+
     list_parser = subparsers.add_parser(
         "list",
-        help="List all available skills",
+        help="List installed skills",
     )
 
     list_parser.set_defaults(func=list_command)
 
-    # ==================================================
-    # INFO
-    # ==================================================
+    # ---------------- INFO ----------------
+
     info_parser = subparsers.add_parser(
         "info",
-        help="Show information about a skill",
+        help="Show skill information",
     )
 
     info_parser.add_argument(
         "name",
-        help="Skill name",
     )
 
     info_parser.set_defaults(func=info_command)
 
-    # ==================================================
-    # BUILD
-    # ==================================================
+    # ---------------- BUILD ----------------
+
     build_parser = subparsers.add_parser(
         "build",
-        help="Build a skill package",
+        help="Build a PromptForge package",
     )
 
     build_parser.add_argument(
         "name",
-        help="Skill name",
     )
 
     build_parser.set_defaults(func=build_command)
 
-    # ==================================================
-    # RUN
-    # ==================================================
+    # ---------------- INSTALL ----------------
+
+    install_parser = subparsers.add_parser(
+        "install",
+        help="Install a PromptForge package",
+    )
+
+    install_parser.add_argument(
+        "package",
+        help="Path to .zip package",
+    )
+
+    install_parser.set_defaults(func=install_command)
+
     args = parser.parse_args()
 
     if hasattr(args, "func"):
