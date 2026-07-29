@@ -1,0 +1,2 @@
+[console_scripts]
+promptforge = promptforge.cli:main
