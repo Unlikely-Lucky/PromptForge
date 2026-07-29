@@ -1,0 +1,48 @@
+# PromptForge
+
+> Build better AI behavior.
+
+PromptForge is an open-source toolkit for building, organizing, evaluating, and sharing reusable AI skills and prompt systems.
+
+The project aims to provide a structured, version-controlled approach to prompt engineering instead of scattered prompt collections.
+
+## Goals
+
+- Create reusable AI skills
+- Improve prompt quality
+- Standardize AI workflows
+- Encourage community collaboration
+- Build evaluation-driven prompt engineering
+
+## Features
+
+- Modular skills
+- Evaluation framework
+- Documentation-first development
+- GitHub-friendly structure
+- Open-source contributions
+
+## Repository Structure
+
+```
+PromptForge/
+├── docs/
+├── skills/
+├── examples/
+├── evaluations/
+├── templates/
+├── tests/
+└── scripts/
+```
+
+## Roadmap
+
+See ROADMAP.md
+
+## Contributing
+
+See CONTRIBUTING.md
+
+## License
+
+MIT
