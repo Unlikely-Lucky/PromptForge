@@ -1,0 +1,24 @@
+name: writing
+
+version: 1.0.0
+
+category: writing
+
+status: draft
+
+license: MIT
+
+author: PromptForge Contributors
+
+description: >
+  Produces clear, structured, audience-aware written content.
+
+compatibility:
+  - OpenAI
+  - Anthropic
+  - Google
+
+tags:
+  - writing
+  - editing
+  - communication
