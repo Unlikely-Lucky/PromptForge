@@ -1,5 +1,7 @@
 import argparse
+
 from . import __version__
+from .generators.skill import create_skill
 
 
 def main():
@@ -34,7 +36,16 @@ def main():
 
     args = parser.parse_args()
 
-    if args.command == "new":
-        print(f"Creating {args.resource}: {args.name}")
-    else:
-        parser.print_help()
+    try:
+        if args.command == "new":
+            if args.resource == "skill":
+                create_skill(args.name)
+        else:
+            parser.print_help()
+
+    except FileExistsError as e:
+        print(f"Error: {e}")
+
+
+if __name__ == "__main__":
+    main()
