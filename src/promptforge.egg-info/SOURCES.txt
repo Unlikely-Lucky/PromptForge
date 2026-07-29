@@ -3,6 +3,7 @@ README.md
 pyproject.toml
 src/promptforge/__init__.py
 src/promptforge/__main__.py
+src/promptforge/builder.py
 src/promptforge/cli.py
 src/promptforge/generators.py
 src/promptforge/info.py
@@ -16,6 +17,7 @@ src/promptforge.egg-info/entry_points.txt
 src/promptforge.egg-info/requires.txt
 src/promptforge.egg-info/top_level.txt
 src/promptforge/commands/__init__.py
+src/promptforge/commands/build.py
 src/promptforge/commands/info.py
 src/promptforge/commands/list.py
 src/promptforge/commands/new.py
