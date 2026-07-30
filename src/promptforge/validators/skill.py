@@ -50,8 +50,7 @@ def validate_skill(path: Path) -> list[str]:
     return errors
 
 
-def validate_all():
-    skills_dir = Path("skills")
+def validate_all(skills_dir=Path("skills")):
 
     if not skills_dir.exists():
         print("No skills directory found.")
