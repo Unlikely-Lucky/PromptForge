@@ -3,28 +3,37 @@ from pathlib import Path
 from promptforge.generators.skill import create_skill
 
 
-def test_create_skill(tmp_path, monkeypatch):
-    monkeypatch.chdir(tmp_path)
+def test_create_skill(tmp_path):
+    # Arrange
+    templates = tmp_path / "templates" / "skill"
+    templates.mkdir(parents=True)
 
-    template_dir = tmp_path / "templates" / "skill"
-    template_dir.mkdir(parents=True)
+    (templates / "README.md.tpl").write_text("# {name}")
+    (templates / "metadata.yaml.tpl").write_text(
+        "name: {name}\nauthor: {author}"
+    )
+    (templates / "prompt.md.tpl").write_text("{description}")
 
-    (template_dir / "README.md.tpl").write_text("# {name}\n", encoding="utf-8")
-    (template_dir / "SKILL.md.tpl").write_text("", encoding="utf-8")
-    (template_dir / "prompt.md.tpl").write_text("", encoding="utf-8")
-    (template_dir / "examples.md.tpl").write_text("", encoding="utf-8")
-    (template_dir / "eval.md.tpl").write_text("", encoding="utf-8")
-    (template_dir / "metadata.yaml.tpl").write_text("name: {name}", encoding="utf-8")
-    (template_dir / "CHANGELOG.md.tpl").write_text("", encoding="utf-8")
+    skills_dir = tmp_path / "skills"
 
-    # Point the generator at the temporary template directory.
-    import promptforge.generators.skill as skill_module
-    skill_module.TEMPLATE_DIR = template_dir
+    # Act
+    create_skill(
+        name="reply",
+        description="Replies politely",
+        author="Tester",
+        license_name="MIT",
+        skills_dir=skills_dir,
+        template_dir=templates,
+    )
 
-    create_skill("demo")
+    # Assert
+    skill = skills_dir / "reply"
 
-    skill_dir = tmp_path / "skills" / "demo"
+    assert skill.exists()
+    assert (skill / "README.md").exists()
+    assert (skill / "metadata.yaml").exists()
+    assert (skill / "prompt.md").exists()
 
-    assert skill_dir.exists()
-    assert (skill_dir / "README.md").exists()
-    assert (skill_dir / "metadata.yaml").exists()
+    assert "reply" in (skill / "README.md").read_text()
+    assert "Tester" in (skill / "metadata.yaml").read_text()
+    assert "Replies politely" in (skill / "prompt.md").read_text()

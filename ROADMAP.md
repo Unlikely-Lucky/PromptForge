@@ -1,4 +1,20 @@
-# PromptForge Roadmap
+## 🛣 Roadmap
+
+### Completed
+
+- Skill creation
+- Skill validation
+- Packaging
+- Installation
+- Uninstallation
+
+### Planned
+
+- Richer package metadata
+- Improved CLI output
+- Better test coverage
+- Health checks (`promptforge doctor`)
+- Online skill registry
 
 ## v0.1
 - Repository foundation

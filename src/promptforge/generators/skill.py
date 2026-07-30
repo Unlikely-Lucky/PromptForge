@@ -4,9 +4,9 @@ from pathlib import Path
 TEMPLATE_DIR = Path("templates") / "skill"
 
 
-def load_template(filename):
+def load_template(filename, template_dir=TEMPLATE_DIR):
     """Load a template file from the templates directory."""
-    template_path = TEMPLATE_DIR / filename
+    template_path = template_dir / filename
 
     if not template_path.exists():
         raise FileNotFoundError(f"Template not found: {filename}")
@@ -19,10 +19,11 @@ def create_skill(
     description="Describe this skill",
     author="Unknown",
     license_name="MIT",
+    skills_dir=Path("skills"),
+    template_dir=TEMPLATE_DIR,
 ):
     """Create a new PromptForge skill."""
 
-    skills_dir = Path("skills")
     skill_dir = skills_dir / name
 
     if skill_dir.exists():
@@ -30,8 +31,8 @@ def create_skill(
 
     skill_dir.mkdir(parents=True)
 
-    for template in TEMPLATE_DIR.glob("*.tpl"):
-        content = load_template(template.name)
+    for template in template_dir.glob("*.tpl"):
+        content = load_template(template.name, template_dir)
 
         content = content.format(
             name=name,
