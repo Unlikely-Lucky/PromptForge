@@ -1,4 +1,4 @@
-from ..info import show_skill_info
+from ..services.info import show_skill_info
 
 
 def run(args):

@@ -1,4 +1,4 @@
-from ..listing import list_skills
+from ..services.listing import list_skills
 
 
 def run(args):

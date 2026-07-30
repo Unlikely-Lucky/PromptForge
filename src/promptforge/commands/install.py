@@ -1,4 +1,4 @@
-from ..installer import install_skill
+from ..services.installer import install_skill
 
 
 def run(args):

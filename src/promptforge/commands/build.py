@@ -1,4 +1,4 @@
-from ..builder import build_skill
+from ..services.builder import build_skill
 
 
 def run(args):
