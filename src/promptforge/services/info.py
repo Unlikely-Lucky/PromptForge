@@ -2,10 +2,13 @@ from pathlib import Path
 import yaml
 
 
-def show_skill_info(skill_name: str):
+def show_skill_info(
+    skill_name: str,
+    skills_dir=Path("skills"),
+):
     """Display metadata for a PromptForge skill."""
 
-    skill_dir = Path("skills") / skill_name
+    skill_dir = skills_dir / skill_name
 
     if not skill_dir.exists():
         print(f"Error: Skill '{skill_name}' does not exist.")

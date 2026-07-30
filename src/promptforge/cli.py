@@ -11,7 +11,7 @@ from .commands.install import run as install_command
 from .commands.uninstall import run as uninstall_command
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(
         prog="promptforge",
         description="PromptForge CLI - Build, manage and share Prompt Skills.",

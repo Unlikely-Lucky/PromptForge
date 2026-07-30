@@ -1,10 +1,11 @@
 from pathlib import Path
 
 
-def list_skills():
+def list_skills(
+    skills_dir=Path("skills"),
+):
     """List all available PromptForge skills."""
 
-    skills_dir = Path("skills")
 
     if not skills_dir.exists():
         print("No skills directory found.")

@@ -15,7 +15,10 @@ REQUIRED_FILES = {
 }
 
 
-def install_skill(zip_path: str):
+def install_skill(
+    zip_path: str,
+    skills_dir=Path("skills"),
+):
     archive_path = Path(zip_path)
 
     if not archive_path.exists():
@@ -53,7 +56,7 @@ def install_skill(zip_path: str):
 
         skill_name = metadata["name"]
 
-        destination = Path("skills") / skill_name
+        destination = skills_dir / skill_name
 
         if destination.exists():
             print(f"Error: Skill '{skill_name}' is already installed.")

@@ -14,10 +14,14 @@ REQUIRED_FILES = {
 }
 
 
-def build_skill(skill_name: str):
+def build_skill(
+    skill_name: str,
+    skills_dir=Path("skills"),
+    dist_dir=Path("dist"),
+):
     """Package a PromptForge skill into a ZIP archive."""
 
-    skill_dir = Path("skills") / skill_name
+    skill_dir = skills_dir / skill_name
 
     if not skill_dir.exists():
         print(f"Error: Skill '{skill_name}' does not exist.")
@@ -78,7 +82,6 @@ def build_skill(skill_name: str):
 
     # ---------- Build package ----------
 
-    dist_dir = Path("dist")
     dist_dir.mkdir(exist_ok=True)
 
     zip_path = dist_dir / f"{skill_name}-{version}.zip"

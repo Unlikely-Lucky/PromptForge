@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "promptforge"
-version = "0.1.0"
+version = "0.1.1"
 description = "Framework for building reusable AI skills."
 readme = "README.md"
 requires-python = ">=3.10"
